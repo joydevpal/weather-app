@@ -39,8 +39,8 @@ const RootQuery = new GraphQLObjectType({
 					"https://community-open-weather-map.p.rapidapi.com/find",
 					{
 						headers: {
-							"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-							"x-rapidapi-key": "25719d3672mshbbd8a209e307fddp13e269jsnaa82a0f9d66a",
+							"x-rapidapi-host": process.env.RAPIDAPI_HOST,
+							"x-rapidapi-key": process.env.RAPIDAPI_KEY,
 						},
 						params: {
 							units: "imperial",
