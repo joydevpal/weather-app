@@ -1,26 +1,15 @@
-const express = require("express");
-const expressGraphQL = require("express-graphql");
-const schema = require("./schema");
+const { ApolloServer } = require("apollo-server");
+const typeDefs = require("./schema");
+const resolvers = require("./resolvers");
 const cors = require("cors");
 require("dotenv").config({ path: "../.env" });
 
-const app = express();
+const server = new ApolloServer({
+	typeDefs,
+	resolvers,
+});
 
-var corsOptions = {
-	origin: "http://localhost:3000",
-	credentials: true,
-};
-
-app.use(cors(corsOptions));
-
-app.use(
-	"/graphql",
-	expressGraphQL({
-		schema,
-		graphiql: true,
-	})
-);
-
-app.listen(4000, () => {
-	console.log("Server running on port 4000");
+// start the server
+server.listen().then(({ url }) => {
+	console.log(`Server is ready at ${url}`);
 });
